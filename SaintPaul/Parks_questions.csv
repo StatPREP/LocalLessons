@@ -1,0 +1,103 @@
+orig, new
+"Timestamp", timestamp
+"1. On average, how frequently does your household use: [Regional Parks ]", use_parks
+"1. On average, how frequently does your household use: [Parks with Recreation/Community Centers]", use_recreation
+"1. On average, how frequently does your household use: [Passive Park/Green Space]", use_greenspace
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Athletic fields]", cond_athletic_fields
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Basketball courts]", cond_basketball
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Biking trails]", cond_biking
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Boating areas]", cond_boating
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Community center building]", cond_building
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Fishing areas]", cond_fishing
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Golf courses]", cond_golf
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Off-leash dog parks]", cond_dog
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Outdoor ice-skating rinks]", cond_ice
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Outdoor swimming pools]", cond_pool
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Park restrooms]", cond_restrooms
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Parking lots]", cond_parking
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Picnic areas]", cond_picnic
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Picnic shelters]", cond_shelter
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Playground equipment]", cond_playground
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Tennis courts]", cond_tennis
+"2. Based on your experiences, please rate the condition of each of the following amenities. [Walking trails/ paths]", cond_walking
+"3. Overall, how would rate the condition of the City Parks and Recreation amenities at: [Regional Parks]", cond_regional_parks
+"3. Overall, how would rate the condition of the City Parks and Recreation amenities at: [Parks with Recreation/ Community Centers]", cond_recreation
+"3. Overall, how would rate the condition of the City Parks and Recreation amenities at: [Passive Parks/Green Spaces]", cond_greespace
+"4. How would you prioritize investment in these amenities? [Athletic fields]", inv_athletic_fields
+"4. How would you prioritize investment in these amenities? [Basketball courts]", inv_basketball
+"4. How would you prioritize investment in these amenities? [Biking trails]", inv_biking
+"4. How would you prioritize investment in these amenities? [Boating areas]", inv_boating
+"4. How would you prioritize investment in these amenities? [Community centers]", inv_recreation
+"4. How would you prioritize investment in these amenities? [Fishing areas]", inv_fishing
+"4. How would you prioritize investment in these amenities? [Golf courses]", inv_golf
+"4. How would you prioritize investment in these amenities? [Off-leash dog parks]", inv_dog
+"4. How would you prioritize investment in these amenities? [Outdoor ice-skating rinks]", inv_ice
+"4. How would you prioritize investment in these amenities? [Outdoor swimming pools]", inv_pool
+"4. How would you prioritize investment in these amenities? [Park restrooms]", inv_restrooms
+"4. How would you prioritize investment in these amenities? [Parking lots]", inv_parking
+"4. How would you prioritize investment in these amenities? [Picnic areas]", inv_picnic
+"4. How would you prioritize investment in these amenities? [Picnic shelters]", inv_shelter
+"4. How would you prioritize investment in these amenities? [Playground equipment]", inv_playground
+"4. How would you prioritize investment in these amenities? [Small neighborhood parks]", inv_small_parks
+"4. How would you prioritize investment in these amenities? [Tennis courts]", inv_tennis
+"4. How would you prioritize investment in these amenities? [Walking trails]", inv_walking
+"5. How satisfied are you with the following? [Athletic fields]", sat_athletic_fields
+"5. How satisfied are you with the following? [Beach areas]", sat_beach
+"5. How satisfied are you with the following? [Biking trails]", sat_biking
+"5. How satisfied are you with the following? [Boating areas]", sat_boating
+"5. How satisfied are you with the following? [Community Centers]", sat_recreation
+"5. How satisfied are you with the following? [Fishing areas]", sat_fishing
+"5. How satisfied are you with the following? [Golf courses]", sat_golf
+"5. How satisfied are you with the following? [Indoor swimming pools]", sat_pool_indoors
+"5. How satisfied are you with the following? [Indoor fitness/exercise facilities]", sat_exercise
+"5. How satisfied are you with the following? [Off-leash dog parks]", sat_dog
+"5. How satisfied are you with the following? [Outdoor swimming pools/water parks]", sat_pool
+"5. How satisfied are you with the following? [Outdoor courts]", sat_courts
+"5. How satisfied are you with the following? [Outdoor ice rinks]", sat_ice
+"5. How satisfied are you with the following? [Outdoor amphitheater]", sat_amphiteater
+"5. How satisfied are you with the following? [Picnic areas]", sat_picnic
+"5. How satisfied are you with the following? [Picnic shelters]", sat_shelter
+"5. How satisfied are you with the following? [Playground equipment]", sat_playground
+"5. How satisfied are you with the following? [Skateboarding parks]", sat_skateboarding
+"5. How satisfied are you with the following? [Walking trails]", sat_walking
+"6. Overall, how satisfied are you with: [Regional Parks]", sat_parks
+"6. Overall, how satisfied are you with: [City Parks with Recreation/Community Center]", sat_recreation_park
+"6. Overall, how satisfied are you with: [Passive Park/Green Space]", sat_greenspace
+"7. Is there anything that you think is missing from the parks you visit?", whats_missing
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Purchase land to preserve green space.]", imp_purchase_greenspace
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Purchase land for recreational facilities (e.g., athletic fields, ice rinks, etc.)]", imp_purchase_recreation_land
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Repair older park facilities]", imp_repair_facilities
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Upgrade existing athletic fields]", imp_upgrade_athletic_fields
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Upgrade existing neighborhood recreation centers]", imp_upgrade_recreation
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Upgrade existing city golf courses]", imp_upgrade_golf
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new walking trails]", imp_upgrade_walking
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new biking trails]", imp_upgrade_biking
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Connect existing trails]", imp_connect_trails
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new indoor recreation centers]", imp_indoor_rec
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new athletic fields]", imp_new_athletic_fields
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new off-leash dog parks]", imp_new_dog
+"8. How important is each of the following potential actions to improve the Parks and Recreation system? [Develop new outdoor ice-skating rinks]", imp_new_ice
+"9. Has any member of your household participated in any City Parks and Recreation programs in the past year?", partic_programs
+"10. How would you rate the overall quality of the program(s)?", qual_programs
+"11. If nobody in your household participates in Parks and Recreation programs, why not? (Check all that apply)", partic_why_not
+"12. How important to members of your household are the types of recreation programs listed below? [Adult Fitness/Wellness Programs]", imp_fitness_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Adult Art/Dance/Performing Arts]", imp_arts
+"12. How important to members of your household are the types of recreation programs listed below? [Adult Sports Programs]", imp_adult_sports
+"12. How important to members of your household are the types of recreation programs listed below? [After School Programs]", imp_after_school
+"12. How important to members of your household are the types of recreation programs listed below? [Computer Training]", imp_computer_training
+"12. How important to members of your household are the types of recreation programs listed below? [Family Programs]", imp_family_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Nature Programs]", imp_nature_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Pre-school Programs]", imp_preschool_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Programs for Disabled Residents]", imp_disabled_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Seniors Programs]", imp_senior_programs
+"12. How important to members of your household are the types of recreation programs listed below? [Youth Summer Camp Programs]", imp_summer_camp
+"12. How important to members of your household are the types of recreation programs listed below? [Youth Fitness/Wellness Programs]", imp_youth_fitness
+"12. How important to members of your household are the types of recreation programs listed below? [Youth Art/Dance/Performing Arts]", imp_youth_arts
+"12. How important to members of your household are the types of recreation programs listed below? [Youth Sports Programs]", imp_youth_sports
+"12. How important to members of your household are the types of recreation programs listed below? [Youth Learn to Swim Programs]", imp_learn_swim
+"13. How do you learn about the City's parks, trails, programs and activities? (check all that apply)", how_hear 
+"14. What programs, activities or services would you like to see offered at your City Parks/ Recreation Centers?", what_new_programs
+"15. Which City Parks/Recreation Centers do you and members of your household visit most often?", visit_most_often
+"16. Which household type best represents your household?", household_type
+"17. What is your home zip code?", zipcode
+"COUNT", count

@@ -1,0 +1,120 @@
+---
+title: "Parks & Recreation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggformula)
+library(mosaic)
+library(mosaicCore)
+library(lubridate)
+Parks <- load("Data/Parks.Rda")
+```
+
+## Saint Paul parks survey
+
+The survey asks repeated questions about the "importance", "condition", "prioritization", etc. of various aspects of the parks.
+
+```{r}
+gf_counts(~ cond_ice, data = Parks)
+gf_counts(~ cond_ice, fill = ~ sat_ice, data = Parks)
+gf_counts(~ household_type, fill = ~ use_recreation, data = Parks)
+```
+
+```{r}
+gf_counts(~ use_greenspace | household_type, fill = ~ use_recreation, data = Parks)
+```
+
+## Reading the raw data
+
+```{r eval = FALSE}
+library(forcats)
+imp_levels <- function(x) {
+  fct_recode(x, 
+             vimportant = "Very important",
+             important = "Important",
+             slightly  = "Slightly important",
+             not = "Not important",
+             vnot = "Very unimportant",
+             not = "Unimportant",
+             dont_know = "Not sure") %>%
+    fct_relevel(., "dont_know") %>%
+    fct_relevel(., "vnot") %>%
+    fct_relevel(., "not") %>%
+    fct_relevel(., "slightly") %>%
+    fct_relevel(., "important") %>%
+    fct_relevel(., "vimportant") 
+  }
+sat_levels <- function(x) {
+  fct_recode(x, 
+             vsat = "Very satisfied",
+             sat = "Satisfied",
+             dis = "Dissatisfied",
+             vdis = "Very Dissatisfied", 
+             dont_use = "I/we don't use this") %>%
+    fct_relevel(., "dont_use") %>%
+    fct_relevel(., "vdis") %>%
+    fct_relevel(., "dis") %>%
+    fct_relevel(., "sat") %>%
+    fct_relevel(., "vsat") 
+}
+inv_levels <- function(x) {
+  fct_recode(x, 
+             strong = "Highest priority",
+             mid = "Priority",
+             low = "Low priority",
+             not = "Not a priority", 
+             no_opinion = "No opinion"
+             ) %>%
+    fct_relevel(.,"not") %>%
+    fct_relevel(.,"low") %>%
+    fct_relevel(.,"mid") %>%
+    fct_relevel(.,"strong")
+}
+use_levels <- function(x) {
+  fct_recode(x, monthly = "A few times a month", 
+             weekly = "A few times a week",
+             yearly = "A few times a year",
+             daily = "Almost daily",
+             never = "I/we don't use this") %>%
+    fct_relevel(., "weekly") %>%
+    fct_relevel(., "daily")
+}
+cond_levels <- function(x) {
+  fct_recode(x, dont_use = "I/we don't use this",
+             excel = "Excellent",
+             fair = "Fair",
+             good = "Good", 
+             poor = "Poor") %>%
+    fct_relevel(., "dont_use") %>%
+    fct_relevel(., "poor") %>%
+    fct_relevel(., "fair") %>%
+    fct_relevel(., "good") %>%
+    fct_relevel(., "excel")
+}
+```
+
+
+```{r echo=FALSE, message = FALSE}
+Parks <- read_csv("RawData/Parks_And_Recreation_Community_Interest_Survey_Dataset.csv")
+var_names <- read_csv("Parks_questions.csv")
+names(Parks) <- var_names$new
+Parks$timestamp <- mdy_hms(Parks$timestamp)
+Parks$household_type <- 
+  fct_recode(Parks$household_type,
+             kids = "Household with children under 18",
+             no_kids = "Household without children") %>%
+  fct_lump(., n = 2, other_level = "other")
+Parks$zipcode <- parse_number(Parks$zipcode)  
+
+Parks <- Parks %>% 
+  mutate_at(vars_select(names(.), starts_with("imp_")), imp_levels) %>% 
+  mutate_at(vars_select(names(.), starts_with("sat_")), sat_levels) %>%
+  mutate_at(vars_select(names(.), starts_with("cond_")), cond_levels) %>%
+  mutate_at(vars_select(names(.), starts_with("use_")), use_levels) %>% 
+  mutate_at(vars_select(names(.), starts_with("inv_")), inv_levels) 
+save(Parks, file="Data/Parks.Rda")
+```

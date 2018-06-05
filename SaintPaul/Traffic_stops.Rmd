@@ -1,0 +1,65 @@
+# Traffic stops in Saint Paul, MN
+
+```{r setup, include=FALSE}
+load("Data/Stops.Rda")
+library(ggformula)
+library(mosaic)
+library(mosaicCore)
+library(dplyr)
+```
+
+
+## Background
+
+The data behind this lesson are available at the Saint Paul, MN, open-data site on [this page](https://information.stpaul.gov/Public-Safety/Traffic-Stop-Dataset/kkd6-vvns). 
+
+## Basic views
+
+```{r counts, exercise = TRUE}
+tally( ~ race, data = Stops)
+tally(frisked ~ citation | color + hour(date), data = Stops, format = "proportion", useNA="no")
+```
+
+```{r stops1, exercise = TRUE}
+gf_counts( ~ frisked, fill = ~ race, data = Stops, position = "fill")
+gf_counts( ~ race, fill = ~ frisked, data = Stops, position = "fill")
+```
+
+```{r stops1, exercise = TRUE}
+gf_counts( ~ lubridate::hour(date), fill = ~ citation, 
+           data = Stops %>% filter(!is.na(frisked)), position = "fill") %>%
+gf_facet_wrap(~ race)
+```
+
+```{r}
+By_grid <- 
+  Stops %>%
+  group_by(grid_number, hour(date), color) %>%
+  summarise(count = n(), citation = mean(citation == "Yes", na.rm = TRUE)) %>%
+  arrange(desc(citation))
+gf_point(citation ~ count | color ~ ., data = By_grid, color = ~ color) %>%
+  gf_refine(scale_x_log10())
+```
+
+
+
+## Reading the raw data
+
+```{r eval = FALSE}
+library(readr)
+library(lubridate)
+Stops <- read_csv("RawData/Traffic_Stop_Dataset.csv")
+names(Stops) <- c("year", "date", "race", "gender", "frisked", "searched", "citation",  "age", "reason", "grid_number", "location", "count")
+Stops$date <- lubridate::mdy_hms(Stops$date)
+NA_fix <- function(x) {
+  if (is.character(x)) ifelse(x == "No Data", NA, x)
+  else x
+}
+Stops <- as.data.frame(lapply(Stops, NA_fix ), stringsAsFactors = FALSE)
+
+pos <- str_match(head(Stops$location), "([0-9]{2}\\.[0-9]+), (-[0-9]{2}\\.[0-9]+)")[,2:3]
+Stops$long <- pos[,2]
+Stops$lat <- pos[,1]
+Stops$color <- ifelse(Stops$race == "White", "white", "other")
+save(Stops, file = "Data/Stops.Rda")
+```
