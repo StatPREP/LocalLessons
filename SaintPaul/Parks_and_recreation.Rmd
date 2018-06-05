@@ -11,11 +11,12 @@ library(ggformula)
 library(mosaic)
 library(mosaicCore)
 library(lubridate)
-Parks <- load("Data/Parks.Rda")
+load("Data/Parks.Rda")
 ```
 
 ## Saint Paul parks survey
 
+These data come from a survey of Saint Paul residents about parks and recreations, the data from which is posted [here](https://information.stpaul.gov/Public-Facilities-Services/Parks-And-Recreation-Community-Interest-Survey-Dat/x757-9f5s)
 The survey asks repeated questions about the "importance", "condition", "prioritization", etc. of various aspects of the parks.
 
 ```{r}
@@ -32,6 +33,8 @@ gf_counts(~ use_greenspace | household_type, fill = ~ use_recreation, data = Par
 
 ```{r eval = FALSE}
 library(forcats)
+library(tidyselect)
+library(lubridate)
 imp_levels <- function(x) {
   fct_recode(x, 
              vimportant = "Very important",
@@ -95,10 +98,7 @@ cond_levels <- function(x) {
     fct_relevel(., "good") %>%
     fct_relevel(., "excel")
 }
-```
 
-
-```{r echo=FALSE, message = FALSE}
 Parks <- read_csv("RawData/Parks_And_Recreation_Community_Interest_Survey_Dataset.csv")
 var_names <- read_csv("Parks_questions.csv")
 names(Parks) <- var_names$new
