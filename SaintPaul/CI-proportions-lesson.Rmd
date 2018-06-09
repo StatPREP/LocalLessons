@@ -1,0 +1,91 @@
+---
+title: "Confidence Intervals on Proportions"
+author: "The Saint Paul CI working group"
+date: "6/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggformula)
+library(mosaic)
+library(mosaicCore)
+load("Data/Parks.Rda")
+```
+
+
+Look at whether people with and without kids: satisfaction with playgrouns, important of investment in playgrounds.
+
+```{r}
+Play <-
+  Parks %>% 
+  select(kids = household_type, sat_playground, inv_playground)
+```
+
+## Simple stats
+
+Univariate.
+```{r}
+tally( ~ kids, data = Play)
+tally( ~ sat_playground, data = Play)
+tally( ~ inv_playground, data = Play)
+```
+
+Bivariate
+```{r}
+tally(~ sat_playground | kids, data = Play, format="percent")
+tally(~ inv_playground | kids, data = Play, format="percent")
+```
+
+## Trivariate
+
+```{r}
+gf_counts(~ sat_playground | kids, fill = ~ inv_playground, data = Play, position = "fill")
+```
+
+Research Question:
+
+- Do people with and without kids prioritize investment in playgrounds differently?
+- Does controlling for satisfaction change things?
+
+
+
+```{r}
+Stats <- df_stats(vimp ~ kids + sat_playground, data = Playgrounds , ci.prop)
+
+gf_jitter( vimp ~ kids | sat_playground, data = Playgrounds, alpha = .1, height = 0.2, width = 0.2) %>%
+  gf_errorbar(lower + upper ~ kids, data = Stats, color = "blue") %>%
+  gf_hline(yintercept = 0.5)
+
+```
+
+## Dog Parks
+
+```{r}
+Dogs <- Parks %>% 
+  select(kids = household_type, sat_dog, inv_dog) %>%
+  mutate(vimp = as.numeric(inv_dog == "strong")) %>%
+  filter(kids %in% c("kids", "no_kids"))
+```
+
+```{r}
+Stats <- df_stats(vimp ~ kids + sat_dog, data = Dogs , ci.prop)
+
+gf_jitter( vimp ~ kids | sat_dog, data = Dogs, alpha = .1, height = 0.2, width = 0.2) %>%
+  gf_errorbar(lower + upper ~ kids, data = Stats, color = "blue") %>%
+  gf_hline(yintercept = 0.5)
+
+```
+
+
+```{r}
+Stats <- df_stats(vimp ~ sat_dog, data = Dogs , ci.prop)
+
+gf_jitter( vimp ~ sat_dog, data = Dogs, alpha = .1, height = 0.2, width = 0.2) %>%
+  gf_errorbar(lower + upper ~ sat_dog, data = Stats, color = "blue") %>%
+  gf_hline(yintercept = 0.5)
+
+```
+
+
