@@ -1,0 +1,57 @@
+---
+title: "Bicycle Traffic on Freemont Bridge"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(tidyverse)
+library(mosaic)
+library(mosaicCore)
+library(ggformula)
+library(lubridate)
+```
+
+## The Raw Data
+
+The data are available on the Seattle Open Data site and [documented here](https://data.seattle.gov/Transportation/Fremont-Bridge-Hourly-Bicycle-Counts-by-Month-Octo/65db-xm6k).
+
+Let's wrangle them into a more convenient format.
+
+```{r eval = FALSE}
+Freemont <- read_csv("RawData/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+sample_n(Freemont,20)
+names(Freemont) <- c("date", "west", "east")
+Freemont$date <- lubridate::mdy_hms(Freemont$date)
+save(Freemont, file = "Data/Freemont_bikes.Rda")
+```
+
+## Basic wrangling
+
+```{r}
+load("Data/Freemont_bikes.Rda")
+```
+
+```{r}
+Totals <- 
+  Freemont %>%
+  mutate(hour = hour(date), wday = wday(date, label = TRUE)) %>%
+  group_by(wday, hour) %>%
+  summarise(west = sum(west), east = sum(east)) %>%
+  gather(key = direction, value = count, east, west)
+gf_line(count ~ hour | direction, color = ~ wday, data = Totals)
+```
+
+
+```{r}
+Freemont %>%
+  filter(year(date) == 2017) %>%
+  gf_line(west ~ date, color = "blue") %>%
+  gf_line(east ~ date, color = "red", alpha = 0.5)
+```
+
+```{r}
+Freemont %>%
+  summarise(wtot = sum(west, na.rm=TRUE), etot = sum(east, na.rm=TRUE))
+```

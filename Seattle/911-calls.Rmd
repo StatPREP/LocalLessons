@@ -1,0 +1,40 @@
+---
+title: "Seattle 911 Calls"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Data source
+
+These data are from the Seattle Open Date site, [documented here](https://data.seattle.gov/Public-Safety/Seattle-Real-Time-Fire-911-Calls/kzjm-xkqj)
+
+## Raw data
+
+```{r eval = FALSE}
+Calls <- read_csv("RawData/Seattle_Real_Time_Fire_911_Calls.csv")
+nrow(Calls)
+names(Calls)
+head(Calls)
+names(Calls) <- c("address", "type", "date", "lat", "long", "location", "id")
+Calls$location <- NULL
+save(Calls, file = "911_Calls.Rda")
+```
+
+## At a glance
+
+```{r}
+Calls <- load("Data/911_Calls.Rda")
+```
+
+```{r}
+Calls %>%
+  group_by(type) %>% 
+  tally() %>%
+  arrange(desc(n)) %>%
+  mutate(frac = round(100* n / sum(n), 2), 
+         running_percentage = round(100 * cumsum(n) / sum(n),2))
+```
